@@ -22,11 +22,11 @@ namespace RedisRateLimiting
             {
                 throw new ArgumentNullException(nameof(options));
             }
-            if (options.PermitLimit <= 0)
+            if (options.PermitLimit() <= 0)
             {
                 throw new ArgumentException(string.Format("{0} must be set to a value greater than 0.", nameof(options.PermitLimit)), nameof(options));
             }
-            if (options.Window <= TimeSpan.Zero)
+            if (options.Window() <= TimeSpan.Zero)
             {
                 throw new ArgumentException(string.Format("{0} must be set to a value greater than TimeSpan.Zero.", nameof(options.Window)), nameof(options));
             }
@@ -52,7 +52,7 @@ namespace RedisRateLimiting
 
         protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken)
         {
-            if (permitCount > _options.PermitLimit)
+            if (permitCount > _options.PermitLimit())
             {
                 throw new ArgumentOutOfRangeException(nameof(permitCount), permitCount, string.Format("{0} permit(s) exceeds the permit limit of {1}.", permitCount, _options.PermitLimit));
             }
@@ -70,8 +70,8 @@ namespace RedisRateLimiting
         {
             var leaseContext = new FixedWindowLeaseContext
             {
-                Limit = _options.PermitLimit,
-                Window = _options.Window,
+                Limit = _options.PermitLimit(),
+                Window = _options.Window(),
             };
 
             var response = await _redisManager.TryAcquireLeaseAsync();
@@ -80,7 +80,7 @@ namespace RedisRateLimiting
             leaseContext.RetryAfter = response.RetryAfter;
             leaseContext.ExpiresAt = response.ExpiresAt;
 
-            if (leaseContext.Count > _options.PermitLimit)
+            if (leaseContext.Count > _options.PermitLimit())
             {
                 return new FixedWindowLease(isAcquired: false, leaseContext);
             }

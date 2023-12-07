@@ -59,7 +59,7 @@ namespace RedisRateLimiting.Concurrency
                 {
                     rate_limit_key = RateLimitKey,
                     expires_at_key = RateLimitExpireKey,
-                    next_expires_at = (RedisValue)now.Add(_options.Window).ToUnixTimeSeconds(),
+                    next_expires_at = (RedisValue)now.Add(_options.Window()).ToUnixTimeSeconds(),
                     current_time = (RedisValue)nowUnixTimeSeconds,
                     increment_amount = (RedisValue)1D,
                 });
@@ -89,7 +89,7 @@ namespace RedisRateLimiting.Concurrency
                 {
                     rate_limit_key = RateLimitKey,
                     expires_at_key = RateLimitExpireKey,
-                    next_expires_at = (RedisValue)now.Add(_options.Window).ToUnixTimeSeconds(),
+                    next_expires_at = (RedisValue)now.Add(_options.Window()).ToUnixTimeSeconds(),
                     current_time = (RedisValue)nowUnixTimeSeconds,
                     increment_amount = (RedisValue)1D,
                 });

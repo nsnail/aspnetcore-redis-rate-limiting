@@ -11,12 +11,12 @@ namespace RedisRateLimiting
         /// Specifies the time window that takes in the requests.
         /// Must be set to a value greater than <see cref="TimeSpan.Zero" /> by the time these options are passed to the constructor of <see cref="RedisFixedWindowRateLimiter{TKey}"/>.
         /// </summary>
-        public TimeSpan Window { get; set; } = TimeSpan.Zero;
+        public Func<TimeSpan> Window { get; set; } = ()=>TimeSpan.Zero;
 
         /// <summary>
         /// Maximum number of permit counters that can be allowed in a window.
         /// Must be set to a value > 0 by the time these options are passed to the constructor of <see cref="RedisFixedWindowRateLimiter{TKey}"/>.
         /// </summary>
-        public int PermitLimit { get; set; }
+        public Func<int> PermitLimit { get; set; }
     }
 }

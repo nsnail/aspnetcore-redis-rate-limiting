@@ -8,13 +8,12 @@
 		<Description>Redis extensions for rate limiting</Description>
 		<Authors>Cristi Pufu</Authors>
 		<AssemblyName>RedisRateLimiting</AssemblyName>
-		<PackageId>RedisRateLimiting</PackageId>
+		<PackageId>$(AssemblyName).NS</PackageId>
 		<PackageTags>redis;rate-limit;rate-limiting;rate-limiter;aspnetcore;net7;net8</PackageTags>
 		<PackageProjectUrl>https://github.com/cristipufu/aspnetcore-redis-rate-limiting</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/cristipufu/aspnetcore-redis-rate-limiting</RepositoryUrl>
-		<Version>1.1.0</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
